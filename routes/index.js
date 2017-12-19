@@ -11,7 +11,6 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/signup', function(req, res, next) {
-    req.bo
   res.render('signup', {title: 'Signup | Market Place', layout: 'credentials_layout'});
 });
 
