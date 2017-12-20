@@ -7,28 +7,24 @@ var userDbHelper = require('../libs/mysql/user-mysql-helper');
 
 router.post('/signup', function(req, res, next) {
 
-
-    userDbHelper.insertUesr(req.body.name,req.body.email,req.body.password,function (err, result) {
-        if(!processError(err)) {
-            userDbHelper.selectUser(result.insertId,null,null,null,function (err, result) {
-                if(!processError(err)) {
-                    res.status(200).json({code:200 , msg : 'signed up', data : result[0]});
-                    res.end();
-                }
-            });
-        }
-    });
-
-    function processError(error) {
-        if(error)
-        {
-            res.json(200,{code:406 , msg : 'failed: ' + error.message});
+    userDbHelper.selectUser(null,null,req.body.email)
+        .then(function (result) {
+            if(result.length === 0)
+                return userDbHelper.insertUesr(req.body.name,req.body.email,req.body.password);
+            else
+                throw new Error('email already exists');
+        })
+        .then(function (result) {
+            return userDbHelper.selectUser(result.insertId);
+        })
+        .then(function (result) {
+            res.status(200).json({code:200 , msg : 'signed up', data : result[0]});
             res.end();
-            return true;
-        }
-        else
-            return false;
-    }
+        })
+        .catch(function (error) {
+            res.status(200).json({code:406 , msg : 'failed: ' + error.message});
+            res.end();
+        });
 });
 
 module.exports = router;
