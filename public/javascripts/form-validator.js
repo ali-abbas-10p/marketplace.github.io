@@ -1,6 +1,15 @@
 
-function _isValidName(name, p1) {
-    return false;
+function _isValidName(name, errorView) {
+    if(name.length === 0)
+    {
+        errorView.style.visibility = 'visible';
+        return false;
+    }
+    else
+    {
+        errorView.style.visibility = 'hidden';
+        return true;
+    }
 }
 
 formValidator = {

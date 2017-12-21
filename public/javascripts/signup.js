@@ -2,7 +2,8 @@
 $(function () {
 
     $('#btn_signup').click(function () {
-        console.log(formValidator.isValidName())
+        var f_name = $('#f_name');
+        formValidator.isValidName(f_name.val(), $('#span_error_name'));
 
 
 /*
