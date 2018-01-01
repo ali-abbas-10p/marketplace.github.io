@@ -1,28 +1,6 @@
 
 $(function () {
-    $('#form_login').validate({
-        rules:{
-            'email':{
-                required: true,
-                pattern: "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+"
-            },
-            'password': {
-                required: true,
-                minlength:5
-            }
-        },
-        messages:{
-            'email':{
-                required: 'email is required',
-                pattern: 'enter valid email'
-            },
-            'password': {
-                required: 'enter password',
-                minlength:'Password can\'t be less than 5 characters'
-            }
-        }
-    });
-
+    formValidator.validateCredentialForm('#form_login');
     $('#btn_login').click(function () {
         var isValid = $('#form_login').valid();
         console.log(isValid);

@@ -17,7 +17,6 @@ router.post('/signup', function(req, res, next) {
             return userDbHelper.selectUser(result.insertId);
         })
         .then(function (result) {
-            res.session.token = result[0].token;
             res.status(200).json({code:200 , msg : 'signed up', data : result[0]});
             res.end();
         })

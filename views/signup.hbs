@@ -1,5 +1,5 @@
-<div class="alert alert-danger fade out" id="alert_tc">
-    <strong>Alert! </strong>Please accept terms and conditions.
+<div class="alert alert-danger fade out" id="alert">
+    <strong>Error! </strong>Email already exists.
 </div>
 
 <div class="container">
@@ -10,23 +10,22 @@
             </div>
             <div class="col-sm-12 col-md-10 col-md-offset-1">
                 <form id="form_signup">
-                    <span class="validation-error" id="span_error_name">Enter valid name</span>
                     <div class="form-group">
-                        <input class="form-control" type="text" id="f_name" name='name' placeholder="Full Name"/>
+                        <input class="form-control" type="text" id="i_name" name='name' placeholder="Full Name"/>
                     </div>
                     <div class="form-group">
-                        <span class="validation-error" id="span_error_email">Enter valid email address</span>
-                        <input class="form-control" type="text" id="f_email" name='email' placeholder="Email"/>
+                        <input class="form-control" type="text" id="i_email" name='email' placeholder="Email"/>
                     </div>
                     <div class="form-group">
-                        <span class="validation-error" id="span_error_password">Password should be greater than 4 characters</span>
-                        <input class="form-control" type="password" id="f_password" name='password' placeholder="Password"/>
+                        <input class="form-control" type="password" id="i_password" name='password' placeholder="Password"/>
                     </div>
+<!--
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="cb_tc"> I agree to the <a href="#">Terms & Conditions</a>
                         </label>
                     </div>
+-->
                     <div class="form-group">
                         <button type="button" id="btn_signup" class="btn btn-def btn-block login">Signup</button>
                     </div>
@@ -39,4 +38,3 @@
     </div>
 </div>
 <script type="application/javascript" src="/javascripts/signup.js"></script>
-<script type="application/javascript" src="/javascripts/form-validator.js"></script>
