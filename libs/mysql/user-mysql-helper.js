@@ -26,7 +26,7 @@ function _insertUser(name, email, password) {
 
 function _selectUser(id,name, email, password) {
     return new Promise(function (fulfill, reject) {
-        var qb = queryBuilder.select('*');
+        var qb = queryBuilder.select('id, name, email, token, createdOn');
         if(id)
             qb.where('id',id);
         if(name)
