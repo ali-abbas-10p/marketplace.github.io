@@ -21,6 +21,11 @@ $(function () {
                 email : f_email.val(),
                 password: f_password.val()
             },function (res) {
+                switch (res.statusCode) {
+                    case 200:
+                        $.load('/home');
+                        break;
+                }
                 console.log(res);
             }).fail(function () {
                 console.log('error');
