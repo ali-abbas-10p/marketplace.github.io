@@ -13,13 +13,7 @@ formValidator.isValidName = function (name, errorView) {
 };
 
 formValidator.isValidEmail = function (email, errorView) {
-    var isEmailValid = new RegExp("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-        "\\@" +
-        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-        "(" +
-        "\\." +
-        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-        ")+").test(email);
+    var isEmailValid = new RegExp("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+").test(email);
     if(isEmailValid) {
         errorView.hide();
         return true;
