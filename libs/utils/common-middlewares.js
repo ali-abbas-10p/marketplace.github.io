@@ -1,19 +1,22 @@
 exports.authorizationMiddleWare = function (redirect) {
     return function (req,res,next) {
+        var authorization;
         if(req.header('Authorization'))
-            req.authorization = req.header('Authorization');
+            authorization = req.header('Authorization');
         else if(req.session.authorization)
-            req.authorization = req.session.authorization;
+            authorization = req.session.authorization;
+        if(authorization)
+        {
+            req.authorization = authorization;
+            next();
+        }
         else {
             if(redirect)
                 res.redirect('/login');
             else
                 res.status(401).json({code:401,msg:"unauthorized"});
             res.end();
-            return;
         }
-
-        next();
     };
 };
 

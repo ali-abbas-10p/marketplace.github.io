@@ -39,8 +39,13 @@ function _selectUser(id,name, email, password,token) {
         if(token)
         {
             var unBase = commonMethods.decodeBase64(token).split('|');
-            console.log(unBase.length);
-            // qb.where('');
+            if(unBase.length===3) {
+                qb.where('token',unBase[0]);
+                qb.where('createdOn',unBase[1]);
+                qb.where('id',unBase[2]);
+            }
+            else
+                throw new Error('Invalid token');
         }
         qb.get(TABLE_USER,function (err, result) {
             if(err)
