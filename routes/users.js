@@ -17,7 +17,7 @@ router.post('/signup', function(req, res) {
             return userDbHelper.selectUser(result.insertId);
         })
         .then(function (result) {
-            req.session.Authorization = result[0];
+            req.session.authorization = result[0].authorization;
             res.status(200).json({code:200 , msg : 'signed up', data : result[0]});
             res.end();
         })
@@ -33,7 +33,6 @@ router.post('/login',function (req, res) {
             if(result.length === 1)
             {
                 req.session.authorization = result[0].authorization;
-                console.log(req.session.authorization);
                 res.status(200).json({code:200 , msg : 'signed up', data : result[0]});
             }
             else

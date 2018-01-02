@@ -24,10 +24,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set('trust proxy', 1); // trust first proxy
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'marketplace123@!#$#%$Kdklfs',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
+        saveUninitialized: true
+    /*
+        cookie: { secure: true }
+    */
 }));
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname,'node_modules','bootstrap','dist')));
