@@ -24,9 +24,10 @@ function _insertUser(name, email, password) {
     });
 }
 
-function _selectUser(id,name, email, password) {
+function _selectUser(id,name, email, password,token) {
     return new Promise(function (fulfill, reject) {
-        var qb = queryBuilder.select('id, name, email, token, createdOn');
+        var qb = queryBuilder.select('id, name, email, createdOn');
+        qb.select("TO_BASE64(CONCAT(`token`,'|',`createdOn`,'|',`id`)) AS authorization",false);
         if(id)
             qb.where('id',id);
         if(name)
@@ -35,6 +36,12 @@ function _selectUser(id,name, email, password) {
             qb.where('email',email);
         if(password)
             qb.where('password',commonMethods.getMd5(password));
+        if(token)
+        {
+            var unBase = commonMethods.decodeBase64(token).split('|');
+            console.log(unBase.length);
+            // qb.where('');
+        }
         qb.get(TABLE_USER,function (err, result) {
             if(err)
                 reject(err);

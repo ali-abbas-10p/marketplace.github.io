@@ -4,19 +4,20 @@ var router = express.Router();
 var userDbHelper = require('../libs/mysql/user-mysql-helper');
 
 
-router.post('/signup', function(req, res, next) {
+router.post('/signup', function(req, res) {
 
     userDbHelper.selectUser(null,null,req.body.email)
         .then(function (result) {
             if(result.length === 0)
                 return userDbHelper.insertUesr(req.body.name,req.body.email,req.body.password);
             else
-                throw new Error('email already exists');
+                throw new Error('Email already exists');
         })
         .then(function (result) {
             return userDbHelper.selectUser(result.insertId);
         })
         .then(function (result) {
+            req.session.Authorization = result[0];
             res.status(200).json({code:200 , msg : 'signed up', data : result[0]});
             res.end();
         })
@@ -26,11 +27,15 @@ router.post('/signup', function(req, res, next) {
         });
 });
 
-router.post('/login',function (req, res, next) {
+router.post('/login',function (req, res) {
     userDbHelper.selectUser(null,null,req.body.email,req.body.password)
         .then(function (result) {
             if(result.length === 1)
+            {
+                req.session.authorization = result[0].authorization;
+                console.log(req.session.authorization);
                 res.status(200).json({code:200 , msg : 'signed up', data : result[0]});
+            }
             else
                 throw new Error('Invalid email or password');
         })

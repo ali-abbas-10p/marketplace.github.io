@@ -6,12 +6,10 @@ var crypto = require('crypto');
  * @returns {string}
  * @private
  */
-function _getMd5(string) {
+exports.getMd5 =  function (string) {
     return crypto.createHash('md5').update(string).digest('hex');
-}
+};
 
-
-
-module.exports = {
-    getMd5 : _getMd5
+exports.decodeBase64 = function (base64) {
+    return new Buffer(base64, 'base64').toString('ascii')
 };

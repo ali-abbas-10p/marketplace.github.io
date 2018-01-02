@@ -33,6 +33,7 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname,'node_modules','bootstrap','dist')));
 app.use(express.static(path.join(__dirname,'node_modules','jquery','dist')));
 app.use(express.static(path.join(__dirname,'node_modules','jquery-validation','dist')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);

@@ -1,28 +1,22 @@
 var express = require('express');
 var router = express.Router();
+var commonMiddleWares = require('../libs/utils/common-middlewares');
 
+
+
+router.get('/', commonMiddleWares.authorizationMiddleWare(true));
 router.get('/', function(req, res, next) {
-    console.log(req.session.token);
-    if(req.session.token)
-        res.writeHead(302, {'Location': '/home'});
-    else
-        res.writeHead(302, {'Location': '/login'});
+    res.writeHead(302, {'Location': '/home'});
     res.end();
 });
 
-router.get('/home',function (req, res, next) {
-    if(req.session.token)
-        next();
-    else
-    {
-        res.writeHead(302, {'Location': '/login'});
-        res.end();
-    }
-});
-router.get('/home',function (req, res, next) {
+router.get('/home',commonMiddleWares.authorizationMiddleWare(true));
+router.get('/home',function (req, res) {
+    console.log(req.header('Authorization'));
     res.end();
+
 });
-router.get('/login', function(req, res, next) {
+router.get('/login', function(req, res) {
   res.render('login', {title: 'Login | Market Place', layout: 'credentials_layout'});
 });
 
